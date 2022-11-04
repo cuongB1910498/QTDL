@@ -11,6 +11,11 @@
         echo '<script>alert("Đăng Ký thành công");</script>';
         unset($_SESSION['dangky']);
     }
+
+    if(isset($_SESSION['dntc'])){
+        echo '<script>alert("ĐĂNG NHẬP THÀNH CÔNG");</script>';
+        unset($_SESSION['dntc']);
+    }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>

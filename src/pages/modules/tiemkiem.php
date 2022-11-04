@@ -24,6 +24,16 @@
                 <th>PHÒNG</th>
                 <th>SỨC CHỨA</th>
                 <th>TÌNH TRẠNG</th>
+                
+                <?php 
+                    if(isset($_SESSION['dangnhap']) && $_SESSION['admin'] == 1){  
+                ?>
+                
+                <th>QUẢN LÝ</th>
+
+                <?php
+                    }
+                ?>
             </tr>
             
             <?php 
@@ -40,13 +50,26 @@
                 
                 <td><?php echo $row['cho'] ?></td>
                 
-                <td><?php echo $row['tinh_trang'] ?></td>
+                <td><?php  if($row['tinh_trang'] == 1) echo "CÓ THỂ SỬ DỤNG" ?></td>
                 
+                <?php 
+                    if(isset($_SESSION['dangnhap']) && $_SESSION['admin'] == 1){  
+                ?>
+                
+                <td>
+                    <a href="index.php?quanly=suaphong&stt_phong=<?php echo $rows['stt_phong'] ?>" class="btn btn-warning" type="button">SỬA</a>
+                    <a href="index.php?quanly=suaphong&stt_phong=<?php echo $rows['stt_phong'] ?>&xoa=1" class="btn btn-danger" type="button">XÓA</a>
+                </td>
+
+                <?php
+                    }
+                ?>
             </tr>
 
             <?php
                 }
             ?>
+
         </table>
    </div>
    <?php 

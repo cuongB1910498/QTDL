@@ -4,7 +4,7 @@
 ?>
 <div class="main">
 <h2>DANH SÁCH PHÒNG</h2>
-<div class="row offset-1">
+<div class="row offset-2">
     <table border="1">
         <tr>
             <th>STT </th>
