@@ -26,7 +26,7 @@
 ?>
 <h2>Thêm Thiết Bị vào Phòng: <?php echo $stt_phong ?></h2>
 <div class="row offset-2">
-    <form method="POST">
+    <form method="POST" id="themchitiet">
     <div class="form-group row mb-3">
         <label class="col-2">LOẠI THIẾT BỊ:</label>
         <div class="col">
@@ -49,16 +49,16 @@
     </div>
 
     <div class="form-group row mb-3">
-        <label for="my-input" class="col-2">TÊN THIẾT BỊ: </label>
+        <label for="ten" class="col-2">TÊN THIẾT BỊ: </label>
         <div class="col-5">
-            <input id="my-input" class="form-control" type="text" name="ten">
+            <input id="ten" class="form-control" type="text" name="ten">
         </div>
     </div>
 
     <div class="form-group row mb-3">
-        <label for="my-input" class="col-2">SỐ LƯỢNG: </label>
+        <label for="sl" class="col-2">SỐ LƯỢNG: </label>
         <div class="col-5">
-            <input id="my-input" class="form-control" type="text" name="sl">
+            <input id="sl" class="form-control" type="text" name="sl">
         </div>
     </div>
 
@@ -129,3 +129,23 @@
             ?>
     </table>
 </div>
+<!-- Jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+<script>
+	$(document).ready(function (){
+		$("#themchitiet").validate({
+			rules:{
+				ten: {required: true},
+				sl: {required: true, number: true},
+					
+			},
+			messages:{
+				ten: {required: "Bạn chưa nhập tên thiết bị kìa"},
+				sl: {required: "Bạn chưa nhập số lượng thiết bị kìa", number: "Nhập số thôi bạn ơi"},
+	
+			}
+		})
+	});
+</script>

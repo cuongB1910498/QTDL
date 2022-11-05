@@ -1,28 +1,53 @@
 <?php
-    
+    $found = false;
     echo "<h2>Thêm loại thiết bị</h2>";
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $id_Loai = $_POST['id_Loai'];
         $tenloai_tb = $_POST['ten_tb'];
-        $sql = "INSERT INTO loai_tb(id_Loai, tenloai_tb) VALUES ('".$id_Loai."', '".$tenloai_tb."') ";
-        
-        
-        $query = mysqli_query($mysqli, $sql);
-        header("Location: index.php?quanly=themloaitb");
+
+        // kiem tra trung id_loai
+        $sql_check = "SELECT id_Loai from loai_tb";
+        $query_check = mysqli_query($mysqli, $sql_check);
+
+        while ($row = mysqli_fetch_array($query_check)){
+            if($row['id_Loai'] == $id_Loai){
+                $found = true;
+                break;
+            }
+        }
+
+        if($found == false){
+            $sql = "INSERT INTO loai_tb(id_Loai, tenloai_tb) VALUES ('".$id_Loai."', '".$tenloai_tb."') ";
+            $query = mysqli_query($mysqli, $sql);
+            $_SESSION['them'] = 1;
+            header("Location: index.php?quanly=themloaitb");
+        }
     }
 
 ?>
 
 <div class="row offset-2">
-<form method="post">
+<form method="post" id="themloaitb">
     <div class="form-group row mb-3">
         <label for="ma" class="col-2" >Mã</label>
-        <div class="col-5"> <input id="ma" class="form-control" type="text" name="id_Loai"></div>
+        <div class="col-5"> 
+            <input id="ma" class="form-control" type="text" name="id_Loai">
+            <?php
+                if($found == true){
+            ?>
+                <label class="error">Mã thiết bị trùng kìa, check lại bạn admin ơi!</label>
+            <?php
+                }
+            ?>
+    
+        </div>
+        
+        
     </div>
 
     <div class="form-group row mb-3">
-        <label for="" class="col-2" >TÊN THIẾT BỊ:</label>
-        <div class="col-5"> <input id="ma" class="form-control" type="text" name="ten_tb"></div>
+        <label for="ten" class="col-2" >TÊN THIẾT BỊ:</label>
+        <div class="col-5"> <input id="ten" class="form-control" type="text" name="ten_tb"></div>
     </div>
     <div class="row mb-3">
         <div class="col offset-3">
@@ -66,3 +91,24 @@
     ?>
 </table>
 </div>
+
+<!-- Jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+<script>
+	$(document).ready(function (){
+		$("#themloaitb").validate({
+			rules:{
+				id_Loai: {required: true},
+				ten_tb: {required: true},
+					
+			},
+			messages:{
+				id_Loai: {required: "Bạn chưa nhập mã thiết bị kìa"},
+				ten_tb: {required: "Bạn chưa nhập tên thiết bị kìa"},
+	
+			}
+		})
+	});
+</script>

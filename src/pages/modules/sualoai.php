@@ -26,7 +26,7 @@
 
 <h2>Sửa loại</h2>
 <div class="row offset-2 mb-3">
-<form method="post">
+<form method="post" id="sualoai">
     
     <div class="form-group row mb-3">
         <label for="ma" class="col-2" >Mã</label>
@@ -34,8 +34,8 @@
     </div>
 
     <div class="form-group row mb-3">
-        <label for="" class="col-2" >TÊN THIẾT BỊ:</label>
-        <div class="col-5"> <input id="ma" class="form-control" type="text" name="ten_tb" value="<?php echo $row_loai['tenloai_tb'] ?>"></div>
+        <label for="ten" class="col-2" >TÊN THIẾT BỊ:</label>
+        <div class="col-5"> <input id="ten" class="form-control" type="text" name="ten_tb" value="<?php echo $row_loai['tenloai_tb'] ?>"></div>
     </div>
     <div class="row mb-3">
         <div class="col offset-3">
@@ -44,3 +44,24 @@
     </div>
 </form>
 </div>
+
+<!-- Jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+<script>
+	$(document).ready(function (){
+		$("#sualoai").validate({
+			rules:{
+				id_Loai: {required: true},
+				ten_tb: {required: true},
+					
+			},
+			messages:{
+				id_Loai: {required: "Bạn chưa nhập mã thiết bị kìa"},
+				ten_tb: {required: "Bạn chưa nhập tên thiết bị kìa"},
+	
+			}
+		})
+	});
+</script>

@@ -16,6 +16,11 @@
         echo '<script>alert("ĐĂNG NHẬP THÀNH CÔNG");</script>';
         unset($_SESSION['dntc']);
     }
+
+    if(isset($_SESSION['them'])){
+        echo '<script>alert("THÊM THÀNH CÔNG");</script>';
+        unset($_SESSION['them']);
+    }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,9 +51,11 @@
         
         <!-- thanh tìm kiếm -->
         <div class="search col">
-            <form action="index.php?quanly=tiemkiem" method="POST">
-                <input type="text" placeholder="TÌM KIẾM..." width="300px" name="tukhoa">
-                <button class="btn btn-primary" type="submit" name="tiemkiem">TÌM KIẾM</button>
+            <form action="index.php?quanly=tiemkiem" method="POST" id="tiemkiem">
+                <div class="row">
+                    <div class="col-5"><input type="text" placeholder="TÌM KIẾM..." width="300px" name="tukhoa"></div>
+                    <div class="col"><button class="btn btn-primary" type="submit" name="tiemkiem">TÌM KIẾM</button></div>
+                </div>
             </form>
         </div>
 
@@ -146,7 +153,24 @@
         ?>
     </div> 
 </div>   
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+<!-- Jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+<script>
+	$(document).ready(function (){
+		$("#tiemkiem").validate({
+			rules:{
+				tukhoa: {required: true}
+					
+			},
+			messages:{
+				tukhoa:{required: "chưa nhập từ khóa thì sao tiềm kiếm được bạn ơi"}
+	
+			}
+		})
+	});
+</script>
 </body>
 </html>

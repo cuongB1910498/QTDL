@@ -27,7 +27,7 @@
 
 <div class="main">
     <div class="row mb-3 offset-3">
-        <form method="post">
+        <form method="post" id="suachitietphong">
             <div class="form-group row mb-3">
                 <label for="ten" class="col-2">TÊN: </label>
                 <div class="col-5">
@@ -54,3 +54,24 @@
         </form>
     </div>
 </div>
+<!-- Jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+<script>
+	$(document).ready(function (){
+		$("#suachitietphong").validate({
+			rules:{
+				ten_tb: {required: true},
+				sl: {required: true, number: true},
+                sl_hu: {required: true, munber: true}
+					
+			},
+			messages:{
+				ten_tb: {required: "Bạn chưa nhập tên thiết bị kìa"},
+				sl: {required: "Bạn chưa nhập số lượng thiết bị kìa", number: "Nhập số thôi bạn ơi"},
+                sl_hu: {required: "Bạn chưa nhập số lượng thiết bị hư kìa", number: "Nhập số thôi bạn ơi"}
+			}
+		})
+	});
+</script>

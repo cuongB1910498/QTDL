@@ -1,9 +1,9 @@
 <?php 
-    $sql = "SELECT * FROM logloai_tb";
+    $sql = "SELECT * FROM logloai_tb order by thoigian DESC";
     $query = mysqli_query($mysqli, $sql);
     
 ?>
-<div class="main">
+<div style="height: fit-content;">
     <div class="row mb-3" style="margin-top: 20px;">
         <h2>NHẬT KÝ HỆ THỐNG</h2>
     </div>

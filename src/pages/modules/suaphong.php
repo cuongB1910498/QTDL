@@ -26,7 +26,7 @@
 ?> 
 <div class="main">
     <div class="row">
-        <form method="post">
+        <form method="post" id="suaphong">
             <div class="form-group row mb-3 offset-2">
                 <label for="stt" class="col-2" >MÃ: </label>
                 <div class="col-5"> <input id="stt" class="form-control" type="text" name="stt_phong" value="<?php echo $row_get['stt_phong'] ?>"></div>
@@ -40,8 +40,8 @@
             </div>
 
             <div class="form-group row mb-3 offset-2">
-                <label for="succhua" class="col-2" >TÌNH TRẠNG: </label>
-                <div class="col-5"> <input id="succhua" class="form-control" type="text" name="tinhtrang" value="<?php echo $row_get['tinh_trang'] ?>"></div>
+                <label for="tt" class="col-2" >TÌNH TRẠNG: </label>
+                <div class="col-5"> <input id="tt" class="form-control" type="text" name="tinhtrang" value="<?php echo $row_get['tinh_trang'] ?>"></div>
                 
             </div>
 
@@ -54,3 +54,26 @@
         </form>
     </div>
 </div>
+
+<!-- Jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+<script>
+	$(document).ready(function (){
+		$("#suaphong").validate({
+			rules:{
+				stt_phong: {required:true},
+				cho: {required: true, number: true},
+                tinhtrang: {required: true}
+					
+			},
+			messages:{
+				stt_phong: {required: "Bạn chưa nhập số phòng kìa"},
+				cho: {required: "Bạn chưa nhập chỗ kìa", number: "Bạn chỉ được nhập số thôi"},
+                tinhtrang: {required: "Chưa nhập tình trạng kìa bạn êi"}
+	
+			}
+		})
+	});
+</script>

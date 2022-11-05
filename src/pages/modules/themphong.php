@@ -1,29 +1,51 @@
 <?php
-    
-    if($_SERVER['REQUEST_METHOD'] === 'GET'){
-        $sql_p = "SELECT * FROM phong";
-        $query_p = mysqli_query($mysqli, $sql_p);
-    }
+    $found = false;
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $stt_phong = $_POST['stt'];
         $cho =$_POST['cho'];
-        $sql = "INSERT INTO phong(stt_phong, cho, tinh_trang) VALUES('".$stt_phong."', '".$cho."', 1)";
-        echo $sql;
-        $query = mysqli_query($mysqli, $sql);
-        header("Location: index.php?quanly=themphong");
+
+        $sql_check = "SELECT stt_phong FROM phong";
+        $query_check = mysqli_query($mysqli,$sql_check);
+        
+        while ($row = mysqli_fetch_array($query_check)){
+            if($row['stt_phong'] == $stt_phong){
+                $found = true;
+                break;
+            }
+        }
+
+        if($found == false){
+            $sql = "INSERT INTO phong(stt_phong, cho, tinh_trang) VALUES('".$stt_phong."', '".$cho."', 1)";
+            //echo $sql;
+            $query = mysqli_query($mysqli, $sql);
+            $_SESSION['themphong'] = 1;
+            header("Location: index.php?quanly=themphong");
+        }
+        
+        
     }
 ?>
 <h2>Thêm Phòng Mới</h2>
-
+<div class="main">
 <div class="row">
-<form method="post">
-    <div class="form-group row mb-3 offset-2">
+<form method="post" id="themphong">
+    <div class="form-group row mb-3 offset-3">
         <label for="stt" class="col-2" >STT: </label>
-        <div class="col-5"> <input id="stt" class="form-control" type="text" name="stt"></div>
+        <div class="col-5"> 
+            <input id="stt" class="form-control" type="text" name="stt">
+            <?php
+                if($found == true){
+            ?>
+            <label class="error">Phòng bị trùng rồi kìa, kiểm tra lại nhe bạn admin :))</label>
+            <?php
+                }
+            ?>
+        </div>
+        
        
     </div>
 
-    <div class="form-group row mb-3 offset-2">
+    <div class="form-group row mb-3 offset-3">
         <label for="succhua" class="col-2" >SỨC CHỨA: </label>
         <div class="col-5"> <input id="succhua" class="form-control" type="text" name="cho"></div>
         
@@ -40,7 +62,7 @@
 </div>
 
 <h2>DANH SÁCH PHÒNG CŨ</h2>
-<div class="row offset-1">
+<div class="row offset-2">
     <table border="1">
         <tr>
             <th>STT </th>
@@ -52,6 +74,8 @@
         </tr>
         
         <?php
+            $sql_p = "SELECT * FROM phong";
+            $query_p = mysqli_query($mysqli, $sql_p);
             $i = 0;
             while ($rows = mysqli_fetch_array($query_p)){
                 $i++;
@@ -74,3 +98,25 @@
         ?>
     </table>
 </div>
+</div>
+
+<!-- Jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+<script>
+	$(document).ready(function (){
+		$("#themphong").validate({
+			rules:{
+				stt: {required:true},
+				cho: {required: true, number: true},
+					
+			},
+			messages:{
+				stt: {required: "Bạn chưa nhập số phòng kìa"},
+				cho: {required: "Bạn chưa nhập chỗ kìa", number:"Bạn chỉ được nhập số thôi"},
+	
+			}
+		})
+	});
+</script>
