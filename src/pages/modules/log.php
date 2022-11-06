@@ -1,5 +1,5 @@
 <?php 
-    $sql = "SELECT * FROM logloai_tb order by thoigian DESC";
+    $sql = "SELECT * FROM system_log order by thoigian DESC";
     $query = mysqli_query($mysqli, $sql);
     
 ?>
@@ -12,8 +12,8 @@
         <tr>
             
             <th>STT</th>
+            <th>LOẠI</th>
             <th>THAO TÁC</th>
-            <th>TÊN</th>
             <th>THỜI GIAN</th>
         </tr>
         
@@ -31,7 +31,7 @@
 
             <td><?php echo $row['ten'] ?></td>
 
-            <td><?php echo $row['thoigian'] ?></td>
+            <td><?php echo date("H:i:s  d/m/Y", strtotime($row['thoigian'])) ?></td>
         </tr>
 
         <?php
