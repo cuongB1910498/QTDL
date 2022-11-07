@@ -18,7 +18,7 @@
             $sql = "INSERT INTO phong(stt_phong, cho, tinh_trang) VALUES('".$stt_phong."', '".$cho."', 1)";
             //echo $sql;
             $query = mysqli_query($mysqli, $sql);
-            $_SESSION['themphong'] = 1;
+            $_SESSION['them'] = 1;
             header("Location: index.php?quanly=themphong");
         }
         

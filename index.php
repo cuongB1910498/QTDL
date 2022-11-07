@@ -21,7 +21,9 @@
         echo '<script>alert("THÊM THÀNH CÔNG");</script>';
         unset($_SESSION['them']);
     }
-?><!DOCTYPE html>
+    
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

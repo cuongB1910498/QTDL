@@ -97,7 +97,7 @@
             <?php
                 $sql_csvc = "SELECT * FROM tb as a, loai_tb as b 
                 WHERE a.id_Loai = b.id_Loai AND stt_phong = '".$stt_phong."'";
-                echo $sql_csvc;
+                //echo $sql_csvc;
                 $query_csvc = mysqli_query($mysqli, $sql_csvc);
                 $i = 0;
                 while($row = mysqli_fetch_array($query_csvc)){

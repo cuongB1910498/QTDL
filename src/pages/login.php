@@ -89,7 +89,7 @@
                     <label for="" class="col"><a href="register.php">Đăng ký tại đây</a></label>
                 </div>
                 
-                <button type="submit" class="btn btn-primary">Đăng ký</button>
+                <button type="submit" class="btn btn-primary">Đăng Nhập</button>
             </form>
         </div>
     </div>
